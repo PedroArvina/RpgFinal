@@ -1,4 +1,4 @@
-package Construtor;
+package Construtor1;
 
 import javax.swing.*;
 import Mob.Monstro;
@@ -8,7 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
 import java.util.Map;
-import Construtor.Inventario;
+import Construtor1.Inventario1;
 
 public class ControlesDeJogo extends JPanel {
 
@@ -24,13 +24,13 @@ public class ControlesDeJogo extends JPanel {
     private Personagem personagemSelecionado;
     private Map<String, JButton> quadrados;
     private Poderes poderes; 
-    private Inventario inventario;
+    private Inventario1 inventario1;
     private int quantidadePocoesMago = 3;
 
     public ControlesDeJogo(Personagem personagemSelecionado, Acessório acessorio) {
         this.acessorio = acessorio;
         this.poderes = new Poderes();
-        this.inventario = new Inventario();
+        this.inventario1 = new Inventario1();
         this.personagemSelecionado = personagemSelecionado;
         setLayout(new BorderLayout());
         quadrados = new HashMap<>();
@@ -43,10 +43,10 @@ public class ControlesDeJogo extends JPanel {
         controlePanel.add(criarPainelHeroi("Mago", "Fotos/P1", "quadradoMago"));
         add(controlePanel, BorderLayout.CENTER);
 
-        JButton botaoInventario = new JButton("Abrir Inventário");
-        botaoInventario.addActionListener(e -> inventario.abrirInventario(this.personagemSelecionado));
+        JButton botaoInventario1 = new JButton("Abrir Inventário");
+        botaoInventario1.addActionListener(e -> inventario1.abrirInventario1(this.personagemSelecionado));
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        buttonPanel.add(botaoInventario);
+        buttonPanel.add(botaoInventario1);
         add(buttonPanel, BorderLayout.SOUTH);
 
         inicializarAcoesETextos();

@@ -1,6 +1,11 @@
-package Construtor;
+package Construtor5;
 
 import javax.swing.*;
+
+import Mapas.Final;
+import Mapas.Inter;
+import Mapas.Final.StoryStart;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -24,9 +29,8 @@ public class Tabuleiro extends JFrame {
     private Personagem mago;
     private Personagem guerreiro;
     private Personagem anao;
-    private Monstro pug;
-    private Monstro lug;
-    private Monstro dug;
+    private Monstro Lacaio;
+    private Monstro Eldara;
     private Personagem personagemSelecionado;
     private Point posicaoSelecionada;
     private String simboloSelecionado;
@@ -39,14 +43,14 @@ public class Tabuleiro extends JFrame {
         mago = new Mago();
         guerreiro = new Guerreiro();
         anao = new Anão();
-        pug = new Pug();
-        lug = new Lug();
-        dug = new Dug();
+        Lacaio = new Lacaio();
+        Eldara = new Eldara();
+
 
         // Inicializar sistema de turnos
-        turno = new Turno(mago, guerreiro, anao, pug, lug, dug);
+        turno = new Turno(mago, guerreiro, anao, Eldara, Lacaio);
         ia = new IA(this);
-        Inventario inventario = new Inventario();
+        Inventario6 inventario6 = new Inventario6();
         
         setResizable(false); // Impede que a janela seja redimensionada
         setLocationRelativeTo(null); // Centraliza na tela
@@ -71,9 +75,10 @@ public class Tabuleiro extends JFrame {
         posicionarPersonagem(0, 0, "M", mago); // Mago
         posicionarPersonagem(0, 1, "G", guerreiro); // Guerreiro
         posicionarPersonagem(0, 2, "A", anao); // Anão
-        posicionarPersonagem(7, 12, "P", pug); // Pug
-        posicionarPersonagem(7, 13, "L", lug); // Lug
-        posicionarPersonagem(7, 14, "D", dug); // Dug
+        posicionarPersonagem(7, 12, "E", Eldara); // Eldara
+        posicionarPersonagem(7, 11, "L", Lacaio); // Lacaio
+        
+
 
         // Criação do painel de acessórios
         acessorio = new Acessório(new MudarTurnoListener());
@@ -84,8 +89,8 @@ public class Tabuleiro extends JFrame {
 
         
         JPanel painelPrincipal = new JPanel(new BorderLayout());
-        painelPrincipal.add(inventario, BorderLayout.CENTER);
-        painelPrincipal.add(inventario, BorderLayout.SOUTH); // Adiciona o inventário na parte inferior
+        painelPrincipal.add(inventario6, BorderLayout.CENTER);
+        painelPrincipal.add(inventario6, BorderLayout.SOUTH); // Adiciona o inventário na parte inferior
 
         add(painelPrincipal);
 
@@ -123,9 +128,8 @@ public class Tabuleiro extends JFrame {
             acessorio.atualizarStatusMago(mago.getHp());
             acessorio.atualizarStatusGuerreiro(guerreiro.getHp());
             acessorio.atualizarStatusAnao(anao.getHp());
-            acessorio.atualizarStatusPug(pug.getHp());
-            acessorio.atualizarStatusLug(lug.getHp());
-            acessorio.atualizarStatusDug(dug.getHp());
+            acessorio.atualizarStatusLacaio(Lacaio.getHp());
+            acessorio.atualizarStatusEldara(Eldara.getHp());
             acessorio.atualizarTurnoAtual("Turno de " + personagemSelecionado.getNome());
         }
     }
@@ -136,22 +140,25 @@ public class Tabuleiro extends JFrame {
     }
 
     // Verifica se todos os monstros estão mortos
+    
+    
     private boolean todosMonstrosMortos() {
-        return pug.getHp() <= 0 && lug.getHp() <= 0 && dug.getHp() <= 0;
+        return Eldara.getHp() <= 0;
     }
 
 
     public void iniciarNovoTurno() {
         if (todosPersonagensMortos()) {
-            JOptionPane.showMessageDialog(this, "Todos os personagens estão mortos. Você perdeu a partida e a vida, as trevas reinará sobre a terra e todos estão perdidos. Fim do jogo!", "Game Over", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Todos os personagens estão mortos. Você perdeu a partida e a vida, a Bruxa cresceu seu domínio, as trevas reinará sobre a terra e todos estão perdidos. Fim do jogo!", "Game Over", JOptionPane.INFORMATION_MESSAGE);
             fecharTodasJanelas(); // Fecha todas as janelas abertas
             System.exit(0); // Encerra a aplicação após fechar as janelas
             return;
         }
 
         if (todosMonstrosMortos()) {
-            JOptionPane.showMessageDialog(null, "Você venceu! Feche a janela e continue a Aventura", "Vitória", JOptionPane.INFORMATION_MESSAGE);
-             // Pode-se reiniciar o jogo aqui ou fechar, dependendo da lógica desejada
+            JOptionPane.showMessageDialog(null, "Você venceu! Todo mundo Ficou bem, Game Over", "Vitória", JOptionPane.INFORMATION_MESSAGE);
+            new StoryStart();
+            dispose();
         }
 
         while (true) {
@@ -225,7 +232,7 @@ public class Tabuleiro extends JFrame {
             if (atacante instanceof Monstro) {
                 return simbolo.equals("M") || simbolo.equals("G") || simbolo.equals("A");
             } else {
-                return simbolo.equals("P") || simbolo.equals("L") || simbolo.equals("D");
+                return simbolo.equals("E");
             }
         }
         return false;
@@ -276,9 +283,8 @@ public class Tabuleiro extends JFrame {
             case "M": return mago;
             case "G": return guerreiro;
             case "A": return anao;
-            case "P": return pug;
-            case "L": return lug;
-            case "D": return dug;
+            case "E": return Eldara;
+            case "L": return Lacaio;
             default: return null;
         }
     }

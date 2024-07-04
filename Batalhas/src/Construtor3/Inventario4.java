@@ -1,4 +1,4 @@
-package Construtor;
+package Construtor3;
 
 import javax.swing.*;
 import java.awt.*;
@@ -8,13 +8,13 @@ import java.util.HashMap;
 import java.util.Map;
 import Mob.Personagem;
 
-public class Inventario extends JPanel {
+public class Inventario4 extends JPanel {
     private JDialog dialog;
     private JPanel painelItens;
     private Map<String, Runnable> itemActions;
     private int itensEquipados;
 
-    public Inventario() {
+    public Inventario4() {
         setLayout(new BorderLayout());
         setBorder(BorderFactory.createTitledBorder("Inventário"));
 
@@ -23,18 +23,17 @@ public class Inventario extends JPanel {
         JScrollPane scrollPane = new JScrollPane(painelItens);
         add(scrollPane, BorderLayout.CENTER);
 
-        JLabel inventarioGeral = new JLabel("Escolha somente 2 por partida");
-        JPanel painelInventarioGeral = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        painelInventarioGeral.add(inventarioGeral);
-        add(painelInventarioGeral, BorderLayout.NORTH);
+        JLabel inventario4Geral = new JLabel("Escolha somente 2 por partida");
+        JPanel painelInventarioGeral4 = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        painelInventarioGeral4.add(inventario4Geral);
+        add(painelInventarioGeral4, BorderLayout.NORTH);
 
         // Adiciona itens ao inventário
         String[] itens = {
             "Cajado de Madeira: Concede a maga +3 de ataque",
             "Escudo de Aegis: +20 de vida para a maga",
             "Cajado de Aço: Concede a maga +5 de ataque",
-            "Cajado de Teleporte: Concede poder de teleporte a maga",
-            "Anel dos Cinco Magos: Um anel que aumenta em +10 o poder da Maga."
+           
         };
 
         for (String item : itens) {
@@ -55,8 +54,7 @@ public class Inventario extends JPanel {
         itemActions.put("Cajado de Madeira", () -> personagem.setAtaque(personagem.getAtaque() + 3));
         itemActions.put("Escudo de Aegis", () -> personagem.setHp(personagem.getHp() + 20));
         itemActions.put("Cajado de Aço", () -> personagem.setAtaque(personagem.getAtaque() + 5));
-        itemActions.put("Cajado de Teleporte", () -> personagem.setAlcanceMovimento(personagem.getAlcanceMovimento() + 20));
-        itemActions.put("Anel dos Cinco Magos", () -> personagem.setAtaque(personagem.getAtaque() + 8));
+        
     }
 
     private class EquipButtonListener implements ActionListener {
@@ -80,7 +78,7 @@ public class Inventario extends JPanel {
         }
     }
 
-    public void abrirInventario(Personagem personagem) {
+    public void abrirInventario4(Personagem personagem) {
         initializeItemActions(personagem);
 
         dialog = new JDialog();

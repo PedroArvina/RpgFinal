@@ -1,4 +1,4 @@
-package Construtor;
+package Construtor2;
 
 import javax.swing.*;
 import java.awt.*;
@@ -24,9 +24,7 @@ public class Tabuleiro extends JFrame {
     private Personagem mago;
     private Personagem guerreiro;
     private Personagem anao;
-    private Monstro pug;
-    private Monstro lug;
-    private Monstro dug;
+    private Monstro Jane;
     private Personagem personagemSelecionado;
     private Point posicaoSelecionada;
     private String simboloSelecionado;
@@ -39,14 +37,13 @@ public class Tabuleiro extends JFrame {
         mago = new Mago();
         guerreiro = new Guerreiro();
         anao = new Anão();
-        pug = new Pug();
-        lug = new Lug();
-        dug = new Dug();
+        Jane = new Jane();
+
 
         // Inicializar sistema de turnos
-        turno = new Turno(mago, guerreiro, anao, pug, lug, dug);
+        turno = new Turno(mago, guerreiro, anao, Jane);
         ia = new IA(this);
-        Inventario inventario = new Inventario();
+        Inventario3 inventario3 = new Inventario3();
         
         setResizable(false); // Impede que a janela seja redimensionada
         setLocationRelativeTo(null); // Centraliza na tela
@@ -71,9 +68,8 @@ public class Tabuleiro extends JFrame {
         posicionarPersonagem(0, 0, "M", mago); // Mago
         posicionarPersonagem(0, 1, "G", guerreiro); // Guerreiro
         posicionarPersonagem(0, 2, "A", anao); // Anão
-        posicionarPersonagem(7, 12, "P", pug); // Pug
-        posicionarPersonagem(7, 13, "L", lug); // Lug
-        posicionarPersonagem(7, 14, "D", dug); // Dug
+        posicionarPersonagem(7, 12, "J", Jane); // Jane
+
 
         // Criação do painel de acessórios
         acessorio = new Acessório(new MudarTurnoListener());
@@ -84,8 +80,8 @@ public class Tabuleiro extends JFrame {
 
         
         JPanel painelPrincipal = new JPanel(new BorderLayout());
-        painelPrincipal.add(inventario, BorderLayout.CENTER);
-        painelPrincipal.add(inventario, BorderLayout.SOUTH); // Adiciona o inventário na parte inferior
+        painelPrincipal.add(inventario3, BorderLayout.CENTER);
+        painelPrincipal.add(inventario3, BorderLayout.SOUTH); // Adiciona o inventário na parte inferior
 
         add(painelPrincipal);
 
@@ -123,9 +119,7 @@ public class Tabuleiro extends JFrame {
             acessorio.atualizarStatusMago(mago.getHp());
             acessorio.atualizarStatusGuerreiro(guerreiro.getHp());
             acessorio.atualizarStatusAnao(anao.getHp());
-            acessorio.atualizarStatusPug(pug.getHp());
-            acessorio.atualizarStatusLug(lug.getHp());
-            acessorio.atualizarStatusDug(dug.getHp());
+            acessorio.atualizarStatusPug(Jane.getHp());
             acessorio.atualizarTurnoAtual("Turno de " + personagemSelecionado.getNome());
         }
     }
@@ -137,13 +131,13 @@ public class Tabuleiro extends JFrame {
 
     // Verifica se todos os monstros estão mortos
     private boolean todosMonstrosMortos() {
-        return pug.getHp() <= 0 && lug.getHp() <= 0 && dug.getHp() <= 0;
+        return Jane.getHp() <= 0;
     }
 
 
     public void iniciarNovoTurno() {
         if (todosPersonagensMortos()) {
-            JOptionPane.showMessageDialog(this, "Todos os personagens estão mortos. Você perdeu a partida e a vida, as trevas reinará sobre a terra e todos estão perdidos. Fim do jogo!", "Game Over", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Todos os personagens estão mortos. Você perdeu a partida e a vida, a Bruxa cresceu seu domínio, as trevas reinará sobre a terra e todos estão perdidos. Fim do jogo!", "Game Over", JOptionPane.INFORMATION_MESSAGE);
             fecharTodasJanelas(); // Fecha todas as janelas abertas
             System.exit(0); // Encerra a aplicação após fechar as janelas
             return;
@@ -225,7 +219,7 @@ public class Tabuleiro extends JFrame {
             if (atacante instanceof Monstro) {
                 return simbolo.equals("M") || simbolo.equals("G") || simbolo.equals("A");
             } else {
-                return simbolo.equals("P") || simbolo.equals("L") || simbolo.equals("D");
+                return simbolo.equals("J");
             }
         }
         return false;
@@ -276,9 +270,7 @@ public class Tabuleiro extends JFrame {
             case "M": return mago;
             case "G": return guerreiro;
             case "A": return anao;
-            case "P": return pug;
-            case "L": return lug;
-            case "D": return dug;
+            case "J": return Jane;
             default: return null;
         }
     }

@@ -1,4 +1,4 @@
-package Construtor;
+package Construtor4;
 
 import javax.swing.*;
 import java.awt.*;
@@ -27,6 +27,7 @@ public class Tabuleiro extends JFrame {
     private Monstro pug;
     private Monstro lug;
     private Monstro dug;
+    
     private Personagem personagemSelecionado;
     private Point posicaoSelecionada;
     private String simboloSelecionado;
@@ -42,11 +43,12 @@ public class Tabuleiro extends JFrame {
         pug = new Pug();
         lug = new Lug();
         dug = new Dug();
+      
 
         // Inicializar sistema de turnos
         turno = new Turno(mago, guerreiro, anao, pug, lug, dug);
         ia = new IA(this);
-        Inventario inventario = new Inventario();
+        Inventario5 inventario5 = new Inventario5();
         
         setResizable(false); // Impede que a janela seja redimensionada
         setLocationRelativeTo(null); // Centraliza na tela
@@ -73,7 +75,8 @@ public class Tabuleiro extends JFrame {
         posicionarPersonagem(0, 2, "A", anao); // Anão
         posicionarPersonagem(7, 12, "P", pug); // Pug
         posicionarPersonagem(7, 13, "L", lug); // Lug
-        posicionarPersonagem(7, 14, "D", dug); // Dug
+        posicionarPersonagem(7, 11, "D", dug); // Dug
+        
 
         // Criação do painel de acessórios
         acessorio = new Acessório(new MudarTurnoListener());
@@ -84,8 +87,8 @@ public class Tabuleiro extends JFrame {
 
         
         JPanel painelPrincipal = new JPanel(new BorderLayout());
-        painelPrincipal.add(inventario, BorderLayout.CENTER);
-        painelPrincipal.add(inventario, BorderLayout.SOUTH); // Adiciona o inventário na parte inferior
+        painelPrincipal.add(inventario5, BorderLayout.CENTER);
+        painelPrincipal.add(inventario5, BorderLayout.SOUTH); // Adiciona o inventário na parte inferior
 
         add(painelPrincipal);
 
@@ -126,6 +129,7 @@ public class Tabuleiro extends JFrame {
             acessorio.atualizarStatusPug(pug.getHp());
             acessorio.atualizarStatusLug(lug.getHp());
             acessorio.atualizarStatusDug(dug.getHp());
+            
             acessorio.atualizarTurnoAtual("Turno de " + personagemSelecionado.getNome());
         }
     }
@@ -150,8 +154,9 @@ public class Tabuleiro extends JFrame {
         }
 
         if (todosMonstrosMortos()) {
-            JOptionPane.showMessageDialog(null, "Você venceu! Feche a janela e continue a Aventura", "Vitória", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Você venceu! Ganhou o Anel dos Cinco Magos,  Um anel que aumenta em +10 o poder da Maga. Feche a janela e continue a Aventura", "Vitória", JOptionPane.INFORMATION_MESSAGE);
              // Pode-se reiniciar o jogo aqui ou fechar, dependendo da lógica desejada
+            dispose();
         }
 
         while (true) {
@@ -225,7 +230,7 @@ public class Tabuleiro extends JFrame {
             if (atacante instanceof Monstro) {
                 return simbolo.equals("M") || simbolo.equals("G") || simbolo.equals("A");
             } else {
-                return simbolo.equals("P") || simbolo.equals("L") || simbolo.equals("D");
+                return simbolo.equals("P") || simbolo.equals("L") || simbolo.equals("D")|| simbolo.equals("X");
             }
         }
         return false;
@@ -279,6 +284,7 @@ public class Tabuleiro extends JFrame {
             case "P": return pug;
             case "L": return lug;
             case "D": return dug;
+            
             default: return null;
         }
     }

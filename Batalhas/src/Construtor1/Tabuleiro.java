@@ -1,4 +1,4 @@
-package Construtor;
+package Construtor1;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,6 +9,8 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 import Mob.*;
+import Construtor1.Inventario1;
+
 
 public class Tabuleiro extends JFrame {
     private static final int LARGURA = 15;
@@ -20,6 +22,7 @@ public class Tabuleiro extends JFrame {
     private ControlesDeJogo controlesDeJogo;
     private Turno turno;
     private IA ia;
+    
 
     private Personagem mago;
     private Personagem guerreiro;
@@ -33,7 +36,7 @@ public class Tabuleiro extends JFrame {
     private boolean podeMover = true;
 
     public Tabuleiro() {
-        super("Tabuleiro de Batalha");
+        super("Tabuleiro Nível 1");
 
         // Inicializar personagens
         mago = new Mago();
@@ -46,7 +49,7 @@ public class Tabuleiro extends JFrame {
         // Inicializar sistema de turnos
         turno = new Turno(mago, guerreiro, anao, pug, lug, dug);
         ia = new IA(this);
-        Inventario inventario = new Inventario();
+        Inventario1 inventario1 = new Inventario1();
         
         setResizable(false); // Impede que a janela seja redimensionada
         setLocationRelativeTo(null); // Centraliza na tela
@@ -84,8 +87,8 @@ public class Tabuleiro extends JFrame {
 
         
         JPanel painelPrincipal = new JPanel(new BorderLayout());
-        painelPrincipal.add(inventario, BorderLayout.CENTER);
-        painelPrincipal.add(inventario, BorderLayout.SOUTH); // Adiciona o inventário na parte inferior
+        painelPrincipal.add(inventario1, BorderLayout.CENTER);
+        painelPrincipal.add(inventario1, BorderLayout.SOUTH); // Adiciona o inventário na parte inferior
 
         add(painelPrincipal);
 
@@ -99,7 +102,7 @@ public class Tabuleiro extends JFrame {
         add(splitPanePrincipal);
 
         // Configuração da janela
-        setSize(1200, 600); // Ajuste o tamanho conforme necessário para acomodar todos os componentes
+        setSize(1700, 1200); // Ajuste o tamanho conforme necessário para acomodar todos os componentes
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         setLocationRelativeTo(null);
@@ -150,8 +153,9 @@ public class Tabuleiro extends JFrame {
         }
 
         if (todosMonstrosMortos()) {
-            JOptionPane.showMessageDialog(null, "Você venceu! Feche a janela e continue a Aventura", "Vitória", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Você venceu! Ganhou um Cajado de aço, Concede a maga +5 de ataque.  Feche a janela e continue a Aventura", "Vitória", JOptionPane.INFORMATION_MESSAGE);
              // Pode-se reiniciar o jogo aqui ou fechar, dependendo da lógica desejada
+            dispose();
         }
 
         while (true) {

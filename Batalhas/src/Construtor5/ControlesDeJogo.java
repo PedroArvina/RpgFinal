@@ -1,4 +1,4 @@
-package Construtor;
+package Construtor5;
 
 import javax.swing.*;
 import Mob.Monstro;
@@ -8,7 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
 import java.util.Map;
-import Construtor.Inventario;
+import Construtor5.Inventario6;
 
 public class ControlesDeJogo extends JPanel {
 
@@ -18,19 +18,18 @@ public class ControlesDeJogo extends JPanel {
     private Personagem mago;
     private Personagem guerreiro;
     private Personagem anao;
-    private Monstro pug;
-    private Monstro lug;
-    private Monstro dug;
+    private Monstro Lacaio;
+    private Monstro Eldara;
     private Personagem personagemSelecionado;
     private Map<String, JButton> quadrados;
     private Poderes poderes; 
-    private Inventario inventario;
+    private Inventario6 inventario6;
     private int quantidadePocoesMago = 3;
 
     public ControlesDeJogo(Personagem personagemSelecionado, Acessório acessorio) {
         this.acessorio = acessorio;
         this.poderes = new Poderes();
-        this.inventario = new Inventario();
+        this.inventario6 = new Inventario6();
         this.personagemSelecionado = personagemSelecionado;
         setLayout(new BorderLayout());
         quadrados = new HashMap<>();
@@ -43,10 +42,10 @@ public class ControlesDeJogo extends JPanel {
         controlePanel.add(criarPainelHeroi("Mago", "Fotos/P1", "quadradoMago"));
         add(controlePanel, BorderLayout.CENTER);
 
-        JButton botaoInventario = new JButton("Abrir Inventário");
-        botaoInventario.addActionListener(e -> inventario.abrirInventario(this.personagemSelecionado));
+        JButton botaoInventario4 = new JButton("Abrir Inventário");
+        botaoInventario4.addActionListener(e -> inventario6.abrirInventario6(this.personagemSelecionado));
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        buttonPanel.add(botaoInventario);
+        buttonPanel.add(botaoInventario4);
         add(buttonPanel, BorderLayout.SOUTH);
 
         inicializarAcoesETextos();

@@ -1,4 +1,4 @@
-package Construtor;
+package Construtor5;
 
 import javax.swing.*;
 import java.awt.*;
@@ -8,13 +8,13 @@ import java.util.HashMap;
 import java.util.Map;
 import Mob.Personagem;
 
-public class Inventario extends JPanel {
+public class Inventario6 extends JPanel {
     private JDialog dialog;
     private JPanel painelItens;
     private Map<String, Runnable> itemActions;
     private int itensEquipados;
 
-    public Inventario() {
+    public Inventario6() {
         setLayout(new BorderLayout());
         setBorder(BorderFactory.createTitledBorder("Inventário"));
 
@@ -23,10 +23,10 @@ public class Inventario extends JPanel {
         JScrollPane scrollPane = new JScrollPane(painelItens);
         add(scrollPane, BorderLayout.CENTER);
 
-        JLabel inventarioGeral = new JLabel("Escolha somente 2 por partida");
-        JPanel painelInventarioGeral = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        painelInventarioGeral.add(inventarioGeral);
-        add(painelInventarioGeral, BorderLayout.NORTH);
+        JLabel inventarioGeral6 = new JLabel("Escolha somente 2 por partida");
+        JPanel painelInventarioGeral6 = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        painelInventarioGeral6.add(inventarioGeral6);
+        add(painelInventarioGeral6, BorderLayout.NORTH);
 
         // Adiciona itens ao inventário
         String[] itens = {
@@ -80,7 +80,7 @@ public class Inventario extends JPanel {
         }
     }
 
-    public void abrirInventario(Personagem personagem) {
+    public void abrirInventario6(Personagem personagem) {
         initializeItemActions(personagem);
 
         dialog = new JDialog();
