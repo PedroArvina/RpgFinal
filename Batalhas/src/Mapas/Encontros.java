@@ -1,6 +1,8 @@
 package Mapas;
 
 import java.awt.BorderLayout;
+import javax.swing.JDialog;
+
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -211,6 +213,7 @@ public class Encontros {
     }
 
 
+
    
     
     private static JFrame frame232;
@@ -220,12 +223,11 @@ public class Encontros {
 
     public static void encontroComGuardas() {
         JFrame frame = new JFrame("Desafio dos Guardas");
-        frame.setSize(810, 810);
-        frame.setUndecorated(true); // Remove a decoração da janela
-        frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE); // Impede que a janela seja fechada pelo usuário
+        frame.setSize(600, 600); 
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); 
         frame.setLayout(new BorderLayout());
-        frame.setResizable(false); // Impede que a janela seja redimensionada
-        frame.setLocationRelativeTo(null); // Centraliza a janela na tela
+        frame.setResizable(false); 
+        frame.setLocationRelativeTo(null); 
 
         JLabel storyLabel = new JLabel("<html><div style='text-align: center;'>Bom dia, serei breve, você precisa vir conosco, precisamos de gente, se você recusar vamos matar vocês</div></html>", JLabel.CENTER);
         frame.add(storyLabel, BorderLayout.NORTH);
@@ -268,19 +270,21 @@ public class Encontros {
 
     
 
-    public static void encontroComDama() {
+    public static void encontroComDama(MapaVerde2 mainMap) {
+        mainMap.setVisible(false); // Esconde a janela principal
+
         JFrame frame = new JFrame("Dama");
         frame.setSize(600, 600);
         frame.setUndecorated(true); // Remove a decoração da janela
-        frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE); // Impede que a janela seja fechada pelo usuário
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setLayout(new BorderLayout());
-        frame.setResizable(false); // Impede que a janela seja redimensionada
-        frame.setLocationRelativeTo(null); // Centraliza a janela na tela
+        frame.setResizable(false);
+        frame.setLocationRelativeTo(null);
 
         JLabel storyLabel = new JLabel("<html><div style='text-align: center;'>Eaí, posso te fazer uma proposta?</div></html>", JLabel.CENTER);
         frame.add(storyLabel, BorderLayout.NORTH);
 
-        ImageIcon originalIcon = new ImageIcon(Encontros.class.getResource("/Fotos/P4.png")); // Confirme o caminho
+        ImageIcon originalIcon = new ImageIcon(Encontros.class.getResource("/Fotos/P4.png"));
         Image image = originalIcon.getImage();
         Image newimg = image.getScaledInstance(300, 300, java.awt.Image.SCALE_SMOOTH);
         ImageIcon icon = new ImageIcon(newimg);
@@ -289,7 +293,6 @@ public class Encontros {
 
         JButton startButton = new JButton("Aceitar Desafio");
         JButton declineButton = new JButton("Recusar Desafio");
-        JButton surpriseButton = new JButton("Então tá bom");
         JPanel buttonPanel = new JPanel();
         buttonPanel.add(startButton);
         buttonPanel.add(declineButton);
@@ -298,28 +301,29 @@ public class Encontros {
         startButton.addActionListener(e -> {
             storyLabel.setText("<html><div style='text-align: center;'>Vamos Batalhar!</div></html>");
             buttonPanel.removeAll();
-            buttonPanel.add(surpriseButton);
-            frame.validate();
-            frame.repaint();
+            frame.dispose(); // Fecha a janela da Dama e não reabre a principal
+            new Construtor2.Tabuleiro(); // Chama a função Tabuleiro
         });
 
-        surpriseButton.addActionListener(e -> {
-            new Construtor2.Tabuleiro(); // Chama a função Tabuleiro quando o botão é clicado
-            frame.dispose(); // Fecha a janela
+        declineButton.addActionListener(e -> {
+            frame.dispose(); // Fecha a janela da Dama
+            mainMap.setVisible(true); // Reabre a janela principal
         });
 
-        frame.setVisible(true); // Torna o frame visível
+        frame.setVisible(true);
     }
+
+
+
+
      // Importando a classe Tabuleiro de Construtor3
 
-    public static void encontroComRei(Runnable postEncounterAction) {
-        JFrame frame = new JFrame("Desafio do Rei");
+    public static void encontroComRei(JFrame mainFrame, Runnable postEncounterAction) {
+        JDialog frame = new JDialog(mainFrame, "Desafio do Rei", true); // JDialog modal com a janela principal como parent
         frame.setSize(600, 600);
-        frame.setUndecorated(true); // Remove a decoração da janela
-        frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE); // Impede que a janela seja fechada pelo usuário
+        frame.setUndecorated(true);
         frame.setLayout(new BorderLayout());
-        frame.setResizable(false); // Impede que a janela seja redimensionada
-        frame.setLocationRelativeTo(null); // Centraliza a janela na tela
+        frame.setLocationRelativeTo(null);
 
         JLabel storyLabel = new JLabel("<html><div style='text-align: center;'>Então Você é aquele que tanto falam?</div></html>", JLabel.CENTER);
         frame.add(storyLabel, BorderLayout.NORTH);
@@ -332,11 +336,9 @@ public class Encontros {
         frame.add(imageLabel, BorderLayout.CENTER);
 
         JButton startButton = new JButton("Eu preciso de algo que você tem");
-        
         JButton surpriseButton = new JButton("Não usaremos diálogos nesta discussão");
         JPanel buttonPanel = new JPanel();
         buttonPanel.add(startButton);
-        
         frame.add(buttonPanel, BorderLayout.SOUTH);
 
         startButton.addActionListener(e -> {
@@ -349,14 +351,58 @@ public class Encontros {
 
         surpriseButton.addActionListener(e -> {
             new Construtor3.Tabuleiro(); // Chama a função Tabuleiro de Construtor3
-            frame.dispose(); // Fecha a janela
+            frame.dispose(); // Fecha a janela modal
             if (postEncounterAction != null) {
                 postEncounterAction.run(); // Executa a ação após o encontro
             }
         });
 
-        frame.setVisible(true); // Torna o frame visível
+        frame.setVisible(true);
     }
+    
+    public static void encontroComDama(MapaVerde3 mainMap) {
+        mainMap.setVisible(false); // Esconde a janela principal
+
+        JFrame frame = new JFrame("Dama");
+        frame.setSize(600, 600);
+        frame.setUndecorated(true); // Remove a decoração da janela
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.setLayout(new BorderLayout());
+        frame.setResizable(false);
+        frame.setLocationRelativeTo(null);
+
+        JLabel storyLabel = new JLabel("<html><div style='text-align: center;'>Eaí, posso te fazer uma proposta?</div></html>", JLabel.CENTER);
+        frame.add(storyLabel, BorderLayout.NORTH);
+
+        ImageIcon originalIcon = new ImageIcon(Encontros.class.getResource("/Fotos/P4.png"));
+        Image image = originalIcon.getImage();
+        Image newimg = image.getScaledInstance(300, 300, java.awt.Image.SCALE_SMOOTH);
+        ImageIcon icon = new ImageIcon(newimg);
+        JLabel imageLabel = new JLabel(icon);
+        frame.add(imageLabel, BorderLayout.CENTER);
+
+        JButton startButton = new JButton("Aceitar Desafio");
+        JButton declineButton = new JButton("Recusar Desafio");
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.add(startButton);
+        buttonPanel.add(declineButton);
+        frame.add(buttonPanel, BorderLayout.SOUTH);
+
+        startButton.addActionListener(e -> {
+            storyLabel.setText("<html><div style='text-align: center;'>Vamos Batalhar!</div></html>");
+            buttonPanel.removeAll();
+            frame.dispose(); // Fecha a janela da Dama e não reabre a principal
+            new Construtor2.Tabuleiro(); // Chama a função Tabuleiro
+        });
+
+        declineButton.addActionListener(e -> {
+            frame.dispose(); // Fecha a janela da Dama
+            mainMap.setVisible(true); // Reabre a janela principal
+        });
+
+        frame.setVisible(true);
+    }
+
 
 
    
