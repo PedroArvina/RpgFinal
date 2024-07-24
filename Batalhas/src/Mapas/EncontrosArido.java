@@ -36,8 +36,17 @@ public class EncontrosArido {
 
     public static void encontroComGolem() {
         prepareIntroGUI();
+        frame.setVisible(false);  // Oculta a janela temporariamente
+        initializeQuestions();
+        prepareChallengeGUI();
+        frame.setVisible(true);  
     }
-
+    
+    public static void closeGolemWindow() {
+        if (frame != null) {
+            frame.dispose();
+        }
+    }
     private static void prepareIntroGUI() {
         frame = new JFrame("Desafio do Golem - Reflexões sobre a Vida");
         frame.setSize(600, 600);
@@ -96,6 +105,7 @@ public class EncontrosArido {
         frame.add(buttonPanel, BorderLayout.SOUTH);
 
         updateQuestion(currentQuestionIndex);
+        frame.setVisible(true);
     }
 
     private static void updateQuestion(int questionIndex) {
