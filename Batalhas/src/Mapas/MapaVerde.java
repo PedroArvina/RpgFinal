@@ -39,7 +39,7 @@ public class MapaVerde extends JFrame {
             "src/Fotos/1.png",
             new String[]{"Iniciar Aventura"},
             new ActionListener[]{
-                e -> updateScene(1)
+                e -> updateScene(11)
             }
         ));
 
@@ -58,7 +58,7 @@ public class MapaVerde extends JFrame {
             "src/Fotos/3.png",
             new String[]{"Voltar", "Falar com o Velho", "Avançar"},
             new ActionListener[]{
-                e -> updateScene(1),
+                e -> updateScene(11),
                 e -> { 
                     Encontros.encontroComVelho(); 
                     updateScene(2); 
@@ -68,15 +68,18 @@ public class MapaVerde extends JFrame {
         ));
 
 
-        // Cena 4
+     // Cena 4
         scenes.add(new Scene(
             "src/Fotos/4.png",
             new String[]{"Voltar", "Avançar"},
             new ActionListener[]{
-                e -> updateScene(2),
+                e -> {
+                    JOptionPane.showMessageDialog(null, "não ha tempo a perder, deixe de perder tempo com aventuras inúteis, Avante!", "Aviso", JOptionPane.WARNING_MESSAGE);
+                },
                 e -> updateScene(4)
             }
         ));
+
 
         // Cena 5
         scenes.add(new Scene(
@@ -148,73 +151,202 @@ public class MapaVerde extends JFrame {
             new String[]{"Voltar", "Avançar"},
             new ActionListener[]{
                 e -> updateScene(9),
-                e -> { 
-                    Encontros.encontroComGuardas(); 
-                    updateScene(11); 
-                },
+                e -> {
+                    Encontros.encontroComGuardas();
+                    dispose(); // Fecha o MapaVerde atual
+                }
             }
         ));
-        
-     // Cena 12
+
+     // Cena Z1 1 a 12
         scenes.add(new Scene(
-            "src/Fotos/12.png",
-            new String[]{"Voltar", "Avançar"},
+            "src/Fotos/Z1.png",
+            new String[]{"Voltar", "Atalho", "Caminho da Sabedoria"},
             new ActionListener[]{
-                e -> updateScene(10),
+                e -> updateScene(0),
+                e -> updateScene(2),
                 e -> updateScene(12)
             }
         ));
         
-     // Cena 13
+     // Cena Z2 2 a 13
         scenes.add(new Scene(
-            "src/Fotos/13.png",
-            new String[]{"Voltar", "Falar com a dama", "Avançar"},
+            "src/Fotos/Z2.png",
+            new String[]{"Voltar", "Direita", "Esquerda"},
             new ActionListener[]{
                 e -> updateScene(11),
-                e -> { 
-                    Encontros.encontroComDama(); 
-                    updateScene(12); 
-                },
-                e -> updateScene(13)
+                e -> updateScene(13),
+                e -> updateScene(17)
             }
         ));
         
-     // Cena 14
+     // Cena Z3 3 a 14
         scenes.add(new Scene(
-            "src/Fotos/14.png",
+            "src/Fotos/Z3.png",
+            new String[]{"Voltar", "Direita", "Esquerda"},
+            new ActionListener[]{
+                e -> updateScene(12),
+                e -> updateScene(14),
+                e -> updateScene(20)
+            }
+        ));
+        
+        // Cena 4 a 15
+        scenes.add(new Scene(
+            "src/Fotos/Z4.png",
+            new String[]{"Voltar", "Direita", "Esquerda"},
+            new ActionListener[]{
+                e -> updateScene(13),
+                e -> updateScene(15),
+                e -> updateScene(22)
+            }
+        ));
+        
+     // Cena 5 a 16
+        scenes.add(new Scene(
+            "src/Fotos/Z5.png",
+            new String[]{"Voltar", "Avançar"},
+            new ActionListener[]{
+                e -> updateScene(14),
+                e -> updateScene(16),
+                
+            }
+        ));
+        
+     // Cena 6 a 17
+        scenes.add(new Scene(
+            "src/Fotos/Z6.png",
+            new String[]{"Voltar", "Avançar"},
+            new ActionListener[]{
+                e -> updateScene(15),
+                e -> updateScene(26),
+                
+            }
+        ));
+        
+     // Cena 18 d 18
+        scenes.add(new Scene(
+            "src/Fotos/Z7.png",
             new String[]{"Voltar", "Avançar"},
             new ActionListener[]{
                 e -> updateScene(12),
-                e -> updateScene(14)
+                e -> updateScene(18),
+                
             }
         ));
         
-     // Cena 15
+     // Cena 19 d
         scenes.add(new Scene(
-            "src/Fotos/15.png",
+            "src/Fotos/Z8.png",
+            new String[]{"Voltar", "Avançar"},
+            new ActionListener[]{
+                e -> updateScene(17),
+                e -> updateScene(19),
+                
+            }
+        ));
+        
+     // Cena 20 d
+        scenes.add(new Scene(
+            "src/Fotos/Z9.png",
+            new String[]{"Voltar", "Avançar"},
+            new ActionListener[]{
+                e -> updateScene(18),
+                e -> updateScene(23),
+                
+            }
+        ));
+        
+     // Cena 21 c 
+        scenes.add(new Scene(
+            "src/Fotos/Z8.png",
             new String[]{"Voltar", "Avançar"},
             new ActionListener[]{
                 e -> updateScene(13),
-                e -> updateScene(15)
+                e -> updateScene(21),
+                
             }
         ));
         
-        
-      
-        
-
-     // Cena 16
+     // Cena 22
         scenes.add(new Scene(
-            "src/Fotos/16.png",
-            new String[]{"Voltar", "Falar com o Rei"},
+            "src/Fotos/Z9.png",
+            new String[]{"Voltar", "Avançar"},
+            new ActionListener[]{
+                e -> updateScene(20),
+                e -> updateScene(24),
+                
+            }
+        ));
+        
+     // Cena 23
+        scenes.add(new Scene(
+            "src/Fotos/Z9.png",
+            new String[]{"Voltar", "Avançar"},
             new ActionListener[]{
                 e -> updateScene(14),
-                e -> Encontros.encontroComRei(() -> {
-                     // Inicia o MapaArido após o encontro com o Rei
-                    dispose(); // Fecha o MapaVerde atual
-                })
+                e -> updateScene(25),
+                
             }
         ));
+        
+     // Cena 24 - Mago 1 d
+        scenes.add(new Scene(
+                "src/Fotos/3.png",
+                new String[]{"Voltar", "Falar com o Velho", "Avançar"},
+                new ActionListener[]{
+                    e -> updateScene(19),
+                    e -> { 
+                        Encontros.encontroComVelho(); 
+                        
+                    },
+                    e -> updateScene(3)
+                }
+            ));
+        
+     // Cena 25 - Mago 2 c
+        scenes.add(new Scene(
+                "src/Fotos/3.png",
+                new String[]{"Voltar", "Falar com o Velho", "Avançar"},
+                new ActionListener[]{
+                    e -> updateScene(21),
+                    e -> { 
+                        Encontros.encontroComVelho(); 
+                         
+                    },
+                    e -> updateScene(3)
+                }
+            ));
+        
+     // Cena 26 - Mago 3 b
+        scenes.add(new Scene(
+                "src/Fotos/3.png",
+                new String[]{"Voltar", "Falar com o Velho", "Avançar"},
+                new ActionListener[]{
+                    e -> updateScene(22),
+                    e -> { 
+                        Encontros.encontroComVelho(); 
+                         
+                    },
+                    e -> updateScene(3)
+                }
+            ));
+     // Cena 27 - Mago 3 a
+        scenes.add(new Scene(
+                "src/Fotos/3.png",
+                new String[]{"Voltar", "Falar com o Velho", "Avançar"},
+                new ActionListener[]{
+                    e -> updateScene(16),
+                    e -> { 
+                        Encontros.encontroComVelho(); 
+                         
+                    },
+                    e -> updateScene(3)
+                }
+            ));
+     
+    
+    
 
     }
 
